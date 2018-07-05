@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.vscode/
+MANIFEST
+dist/*
+.venv
+*~
+media/
+/static/
+/app/static/
+db.sqlite3
+local_settings.py
+db
+

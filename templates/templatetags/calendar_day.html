@@ -1,0 +1,38 @@
+{% load tod_filter %}
+
+<h2>Dia: </h2>
+<!--<div>
+    <input name="day_date" type="date"/><input value="Actualizar" class="" name="_actualizar" type="submit">
+</div>-->
+<div class="content-main">
+    <table class="calendar_day">
+        <thead>
+            <tr>
+                <th></th>
+                {% for tod in tod_list %}
+                <th>{{ tod.name }}</th>
+                {% endfor %}
+            </tr>
+
+        </thead>
+        <tbody>
+            {% regroup results by created|date:"Y-m-d" as obj_by_day %}
+            {% for day in obj_by_day %}
+            <tr>
+                <td>
+                    {{ day.grouper }}
+                </td>
+                {% for tod in tod_list %}
+                <td>
+                    {% for sched in day.list|tod_filter:tod %}
+                    <div>
+                        <a href="{% url 'admin:schedules_schedulerday_change' sched.id %}">{{ sched.employee }}</a>
+                    </div>
+                    {% endfor %}
+                </td>    
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
