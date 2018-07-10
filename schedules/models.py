@@ -121,6 +121,10 @@ class Activity(SchedulerBase):
             self.start_work,
             self.end_work)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        process_payments(self)
+
 
 class SchedulerMonth(Scheduler):
     class Meta:

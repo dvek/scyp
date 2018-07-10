@@ -89,10 +89,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dd8arma55vm2ia',
-        'USER': 'nampgqetgbdpljuyfe',
-        'PASSWORD': 'e0f823c0f590657eabe7e97baa5cb198a3f76485a383b95fad56947c828f6905',
-        'HOST': 'ec2-23-23-180-121.compute-1.amazonaws.com',
+        'NAME': 'scyp',
+        'USER': 'scypuser',
+        'PASSWORD': 'scypuser',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
