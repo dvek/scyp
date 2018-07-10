@@ -24,10 +24,10 @@ PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pa
 SECRET_KEY = '%9!21y(*@=4^=1dz^axojdbc6)5(qzq5d(qtg_i$0zwlwv*1r$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-
+#ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS=['*']
 
 # Application definition
 
@@ -146,9 +146,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ENVIRONMENT_NAME = 'DESARROLLO'
 ENVIRONMENT_COLOR = '#808080'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN = 'm0l3rDcf0ZQAAAAAAAAByv4YQ2kACg6NmB_9Rph4qDqP9g9r0y0j9OT35rnXO6Eo'
-DROPBOX_ROOT_PATH = '/django_scyp'
+#DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+#DROPBOX_OAUTH2_TOKEN = 'm0l3rDcf0ZQAAAAAAAAByv4YQ2kACg6NmB_9Rph4qDqP9g9r0y0j9OT35rnXO6Eo'
+#DROPBOX_ROOT_PATH = '/django_scyp'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
