@@ -48,7 +48,7 @@ class ActivityAdmin(admin.ModelAdmin):
 class SchedulerDayAdmin(CalendarActionMixin, admin.ModelAdmin):
     date_hierarchy = 'created'
     change_list_template = 'admin/schedules/scheduler_day.html'
-    form = SchedDayForm
+    #form = SchedDayForm
 
     
 
