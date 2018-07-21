@@ -16,15 +16,15 @@
 
         </thead>
         <tbody>
-            {% regroup results by created|date:"Y-m-d" as obj_by_day %}
-            {% for day in obj_by_day %}
+            {% regroup results by day|date:"Y-m-d" as obj_by_day %}
+            {% for day_o in obj_by_day %}
             <tr>
                 <td>
-                    {{ day.grouper }}
+                    {{ day_o.grouper }}
                 </td>
                 {% for tod in tod_list %}
                 <td>
-                    {% for sched in day.list|tod_filter:tod %}
+                    {% for sched in day_o.list|tod_filter:tod %}
                     <div>
                         <a href="{% url 'admin:schedules_schedulerday_change' sched.id %}">{{ sched.employee }}</a>
                     </div>

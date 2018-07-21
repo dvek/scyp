@@ -25,7 +25,7 @@ class TimeOfDayAdmin(admin.ModelAdmin):
 
 @admin.register(Scheduler)
 class SchedulerAdmin(AdminCommonMixin, admin.ModelAdmin):
-    list_display = ('id', 'start_work', 'end_work', 'timeofday', 'employee')
+    list_display = ('id', 'day', 'timeofday', 'employee')
     # inlines = [SchedulerRecurringPatternInLine]
 
 

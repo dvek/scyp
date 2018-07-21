@@ -20,8 +20,10 @@ class TimeOfDay(TrackerModel):
 
         
 class SchedulerBase(TrackerModel):
-    start_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora inicio')
-    end_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora termino')
+    # start_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora inicio')
+    # end_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora termino')
+    day = models.DateField(null=True, verbose_name='Dia')
+    timeofday = models.ForeignKey(TimeOfDay, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Periodo")
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         null=True, 
@@ -38,7 +40,6 @@ class Scheduler(SchedulerBase):
     employee = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, verbose_name='Empleado')
     is_recurring = models.BooleanField(default=True, verbose_name="Es recurrente")
     descripction = models.TextField(null=True, verbose_name='Descripción')
-    timeofday = models.ForeignKey(TimeOfDay, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Periodo")
     parent_event = models.ForeignKey('self', null=True, blank=True, on_delete=None, verbose_name='Planificado origen')
 
     objects = SchedulerManager()
@@ -51,14 +52,14 @@ class Scheduler(SchedulerBase):
             self.employee,
             self.timeofday)
 
-    def save(self, *args, **kwargs):
-        if self.timeofday:
-            tz = pytz.timezone(settings.TIME_ZONE)
-            start_time_unaware = datetime.combine(date.today(), self.timeofday.start_time)
-            end_time_unaware = datetime.combine(date.today(), self.timeofday.end_time)
-            self.start_work = start_time_unaware.replace(tzinfo=tz)
-            self.end_work = end_time_unaware.replace(tzinfo=tz)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.timeofday:
+    #         tz = pytz.timezone(settings.TIME_ZONE)
+    #         start_time_unaware = datetime.combine(date.today(), self.timeofday.start_time)
+    #         end_time_unaware = datetime.combine(date.today(), self.timeofday.end_time)
+    #         self.start_work = start_time_unaware.replace(tzinfo=tz)
+    #         self.end_work = end_time_unaware.replace(tzinfo=tz)
+    #     super().save(*args, **kwargs)
         
 
 
