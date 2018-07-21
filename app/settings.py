@@ -141,7 +141,7 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
-ENVIRONMENT_NAME = 'DESARROLLO'
+ENVIRONMENT_NAME = 'DESARROLLO v0.1.0'
 ENVIRONMENT_COLOR = '#808080'
 
 #DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
