@@ -23,7 +23,7 @@ class SchedulerBase(TrackerModel):
     # start_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora inicio')
     # end_work = models.DateTimeField(null=True, blank=True, verbose_name='Fecha/Hora termino')
     day = models.DateField(null=True, verbose_name='Dia')
-    timeofday = models.ForeignKey(TimeOfDay, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Periodo")
+    timeofday = models.ForeignKey(TimeOfDay, null=True, on_delete=models.SET_NULL, verbose_name="Periodo")
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         null=True, 
@@ -138,3 +138,5 @@ class SchedulerDay(Scheduler):
     class Meta:
         proxy = True
         verbose_name = 'Calendario Día'
+
+
