@@ -1,0 +1,3 @@
+
+class TrackingActivityException(Exception):
+    pass

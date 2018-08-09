@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'core',
     'users',
     'schedules',
-    'mptt'
+    'mptt',
+    'tracking_activities',
 ]
 
 MIDDLEWARE = [

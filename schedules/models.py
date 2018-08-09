@@ -124,7 +124,7 @@ class Activity(SchedulerBase):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        process_payments(self)
+        # process_payments(self)
 
 
 class SchedulerMonth(Scheduler):
