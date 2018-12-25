@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'celery',
     'core',
     'users',
     'schedules',
@@ -131,6 +132,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Celery application definition
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
+
+CSV_DELIMITER = ','
+CSV_MARK_START = 'M/Ent'
+CSV_MARK_END = 'M/Sal'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -150,6 +162,59 @@ ENVIRONMENT_COLOR = '#808080'
 #DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 #DROPBOX_OAUTH2_TOKEN = 'm0l3rDcf0ZQAAAAAAAAByv4YQ2kACg6NmB_9Rph4qDqP9g9r0y0j9OT35rnXO6Eo'
 #DROPBOX_ROOT_PATH = '/django_scyp'
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'filters': {
+#         # 'special': {
+#         #     '()': 'project.logging.SpecialFilter',
+#         #     'foo': 'bar',
+#         # },
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             #'filters': ['special']
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#         'myproject.custom': {
+#             'handlers': ['console', 'mail_admins'],
+#             'level': 'INFO',
+#             #'filters': ['special']
+#         }
+#     }
+# }
 
 try:
     from .local_settings import *

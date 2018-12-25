@@ -1,11 +1,14 @@
-import asyncio, time
+import time, logging
 from concurrent.futures import ThreadPoolExecutor
 from django.db import models
 from django.core.exceptions import ValidationError
 
 from core.models import TrackerModel
-from .services import import_data
 from .exceptions import TrackingActivityException
+from .tasks import import_data
+
+
+logger = logging.getLogger(__name__)
 
 
 class RegisterUploaded(TrackerModel):
@@ -40,10 +43,11 @@ class RegisterUploaded(TrackerModel):
             raise ValidationError('Actualmente ya se esta procesando el archivo')
 
     def save(self, *args, **kwargs):
+        logger.info('Guardando registro subido...')
         super().save(*args, **kwargs)
 
     def processing_data(self, *args, **kwargs):
-        # async operation, slow operation
-        pool = ThreadPoolExecutor(2)
-        loop = asyncio.new_event_loop()
-        loop.run_in_executor(pool, import_data, self.id)
+        # slow operation
+        self.status = self.PROCESSING
+        self.save()
+        import_data.delay(self.id)
