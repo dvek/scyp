@@ -7,9 +7,10 @@ from .models import Scheduler
 
 class EventCalendar(LocaleHTMLCalendar):
     
-    def __init__(self, events=None, *args, **kwargs):
+    def __init__(self, events=None, user=None, *args, **kwargs):
         super().__init__()
         self.events = events
+        self.user = user
 
     def formatday(self, day, weekday, events):
         """
@@ -43,7 +44,7 @@ class EventCalendar(LocaleHTMLCalendar):
         Return a formatted month as a table.
         """
  
-        events = Scheduler.objects.filter(day__month=themonth)
+        events = Scheduler.objects.filter(day__month=themonth).user_by_sections(self.user)
  
         v = []
         a = v.append

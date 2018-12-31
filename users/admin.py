@@ -15,10 +15,10 @@ from .models import (
     Increment)
 from .utils import get_full_url
 from core.middleware import get_current_request
-
+from .mixins import UserAdminMixin
 
 @admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdminMixin, UserAdmin):
     
     add_fieldsets = (
         (None, {

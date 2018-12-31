@@ -62,7 +62,7 @@ class SchedulerAdmin(AdminCommonMixin, admin.ModelAdmin):
         extra_context['next_month'] = reverse('admin:schedules_scheduler_changelist') + '?day__gte=' + str(next_month)
         extra_context['add_schedule'] = reverse('admin:schedules_scheduler_add')
 
-        cal = EventCalendar(firstweekday=0)
+        cal = EventCalendar(firstweekday=0, user=request.user)
         html_calendar = cal.formatmonth(d.year, d.month, withyear=True)
         html_calendar = html_calendar.replace('<td ', '<td  width="150" height="150"')
         #print(mark_safe(html_calendar))

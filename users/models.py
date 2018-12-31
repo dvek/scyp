@@ -4,7 +4,9 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 from core.models import TrackerModel
 from .services import update_payments
-from .managers import PaymentScaleManager
+from .managers import (
+    PaymentScaleManager,
+    UserManager)
 
 
 def get_path_files(instance, filename):
@@ -32,6 +34,9 @@ class Section(MPTTModel):
 
     def cantidad_func(self):
         return self.employees.count()
+
+    def child_sections(self):
+        return self.get_descendants(include_self=True)
 
 
 class Position(TrackerModel):
@@ -100,11 +105,15 @@ class CustomUser(AbstractUser):
     position = models.ForeignKey(Position, null=True, 
         on_delete=models.SET_NULL, verbose_name='Cargo')
 
+    objects = UserManager()
     
     def __str__(self):
         if self.first_name is None and self.last_name is None:
             return self.email
         return '{} {}'.format(self.first_name, self.last_name)
+
+    def get_child_sections(self):
+        return self.section.child_sections()
 
 
 
