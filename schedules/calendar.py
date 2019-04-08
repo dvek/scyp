@@ -1,6 +1,5 @@
-from calendar import HTMLCalendar, LocaleHTMLCalendar
-from datetime import datetime as dtime, date, time
-from django.urls import reverse
+from calendar import LocaleHTMLCalendar
+from datetime import datetime as dtime 
 import datetime
 from .models import Scheduler
 
@@ -46,7 +45,6 @@ class EventCalendar(LocaleHTMLCalendar):
  
         #events = Scheduler.objects.filter(day__month=themonth).user_by_sections(self.user)
         events = Scheduler.objects.filter(day__month=themonth, created_by=self.user)
-        import ipdb ; ipdb.set_trace()
         v = []
         a = v.append
         a('<table border="0" cellpadding="0" cellspacing="0" class="month">')
